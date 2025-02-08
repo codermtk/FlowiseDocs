@@ -159,7 +159,7 @@ La configuración avanzada te permite personalizar cómo funciona tu chatbot:
 - Manejo de errores
 - Límites y restricciones  
 
-![Configuración Avanzada](../../.gitbook/assets/partes/parte4/apianalogia.png)
+![Configuración Avanzada](../../.gitbook/assets/partes/parte4/configuracionavanzada.png)
 
 ### Personalizar Nuestro Chatbot
 
@@ -283,6 +283,13 @@ curl -X POST "http://localhost:3000/api/v1/prediction/{chatflowid}"
 -d '{"question":"Hello", "history":[]}'
 ```
 
+Recomiendo usar Postman para probar a hacer requests a través de la API.
+
+Link para descargar Postman:
+https://www.postman.com/downloads/
+
+![Ejemplo de uso de Postman](../../.gitbook/assets/partes/parte4/postman.png)
+
 ## Share
 
 La función Share permite compartir tu chatbot con otros de forma fácil:
@@ -290,7 +297,11 @@ La función Share permite compartir tu chatbot con otros de forma fácil:
 - Permite embeber el chat en otras páginas
 - Controla quién puede acceder
 
+
 [Documentación de Share](../../usar-flowise/embed.md#sharing)
+
+
+![Ejemplo de Share](../../.gitbook/assets/partes/parte4/ejemploshare.png)
 
 ## Implementación en JavaScript
 
