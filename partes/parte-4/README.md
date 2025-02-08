@@ -85,7 +85,7 @@ He provado personalmente todas las alternativas, y tengo dos recomendaciones dep
 
 Dentro de los proveedores modernos que podemos escoger, en mi opinión las dos mejores opciones son Railway y Render porque combinan buenos precios, sencillez y a la vez de los niveles más altos de libertad para configurar de entre las opciones de proveedores modernos.
 
-![Render vs Railway](../../.gitbook/assets/partes/parte4/DespliegueLocal.png)
+![Render vs Railway](../../.gitbook/assets/partes/parte4/renderrailway.png)
 
 En la imagen superior tenemos una comparación entre Render y Railway, y como podemos observar, nos llevamos más por lo que pagamos con Railway, que a la vez es más barato y sencillo de usar, siendo una opción excelente para comenzar a desplegar nuestros proyectos en la nube antes de migrarlos a proveedores más establecidos como AWS.
 
