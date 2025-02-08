@@ -39,11 +39,16 @@ Estas herramientas permiten a los agentes buscar información en la web y navega
 *   **Serper:** Similar a Serp API, pero enfocada en obtener datos de las SERP de Google.
 *   **Web Browser:** Una herramienta completa que permite navegar por la web, renderizar páginas y interactuar con su contenido.
 
+![Ejemplo de uso de Serp API](../../.gitbook/assets/partes/parte5/busqueda.png)
+
 ### 2. Herramientas de Desarrollo y Programación
 
 Estas herramientas son esenciales para tareas de programación e interacción con APIs:
 
-*   **Python Interpreter:** Permite ejecutar código Python directamente dentro de Flowise.
+*   **Code Interpreter:** Permite ejecutar código Python directamente dentro de Flowise.
+
+![Ejemplo de uso del code interpreter](../../.gitbook/assets/partes/parte5/codeinterpreter.png)
+
 *   **OpenAPI Toolkit:** Un conjunto de herramientas para interactuar con APIs que siguen la especificación OpenAPI, facilitando la automatización de tareas con servicios web.
 
 ### 3. Acceso y Manipulación de Archivos
