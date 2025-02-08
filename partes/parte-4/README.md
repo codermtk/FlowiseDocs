@@ -300,7 +300,6 @@ La función Share permite compartir tu chatbot con otros de forma fácil:
 
 [Documentación de Share](../../usar-flowise/embed.md#sharing)
 
-
 ![Ejemplo de Share](../../.gitbook/assets/partes/parte4/ejemploshare.png)
 
 ## Implementación en JavaScript
@@ -334,6 +333,8 @@ query({"question": "Hey, how are you?"}).then((response) => {
 
 Python es ideal para integrar el chatbot en aplicaciones backend o scripts:
 
+Ejemplo de implementación básica:
+
 ```python
 import requests
 
@@ -348,7 +349,35 @@ output = query({
 })
 ```
 
-[Guía de implementación en Python](../../usar-flowise/api.md#python)
+Ejemplo de conversación básica:
+
+```python
+import requests
+
+API_URL = "http://localhost:3000/api/v1/prediction/9f931b5b-83d2-4a8b-be8b-1c34e5f1ce24"
+
+def query(payload):
+    response = requests.post(API_URL, json=payload)
+    return response.json()
+    
+def main():
+    while True:
+        pregunta = input("Pregunta (introduzca 'quit' para terminar): ")
+        if pregunta.lower() == "quit":
+            break
+        output = query({
+            "question": pregunta,
+            "overrideConfig":{
+                "customModelName": "gemini-2.0-flash-exp"
+            }
+        })
+        print(output)
+
+if __name__ == "__main__":
+    main()
+
+```
+
 
 ## Links Relevantes
 
