@@ -111,14 +111,14 @@ Pasos:
 2. Haz Login con tu cuenta de Github
 3. Configura las environment variables de la siguiente manera:
 
-PORT - 3000
-LOG_PATH - /opt/railway/.flowise/logs
-PASSPHRASE - MYPASSPHRASE
-APIKEY_PATH - /opt/railway/.flowise
-DATABASE_PATH - /opt/railway/.flowise
-SECRETKEY_PATH - /opt/railway/.flowise
-FLOWISE_USERNAME - user
-FLOWISE_PASSWORD - 1234
+- PORT - 3000
+- LOG_PATH - /opt/railway/.flowise/logs
+- PASSPHRASE - MYPASSPHRASE
+- APIKEY_PATH - /opt/railway/.flowise
+- DATABASE_PATH - /opt/railway/.flowise
+- SECRETKEY_PATH - /opt/railway/.flowise
+- FLOWISE_USERNAME - user
+- FLOWISE_PASSWORD - 1234
 
 4. Haz click en Deploy
 
