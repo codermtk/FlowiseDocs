@@ -1,12 +1,12 @@
 # Desafío 3: Verificador de RAGs
 
 ## Objetivo
-Crear un agente capaz de llamar a otros proyectos que hayamos hecho y verificar a través de internet. 
+Crear un agente capaz de llamar a otros proyectos que hayamos hecho y verificar la información que nos proporcionen a través de internet. 
 
 ![diagrama](../../../.gitbook/assets/partes/parte5/desafio3.png)
 
 ## Requisitos
-- Capacidad de llamar a otros proyectos nuestros a través de una HTTP POST request.
+- Capacidad de llamar a otros proyectos a través de una HTTP POST request.
 - Capacidad de buscar información a través de internet.
 - Capacidad de contrastar la información obtenida a través del request con la información obtenida a través de internet.
 
