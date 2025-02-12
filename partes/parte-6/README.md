@@ -78,6 +78,7 @@ También puedes sobrescribir los valores de las variables en la API overrideConf
 ```
 
 Puedes empezar a configurar tus variables a través del menú principal:
+
 ![Variables](../../.gitbook/assets/partes/parte6/variables.png)
 
 
