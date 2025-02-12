@@ -13,6 +13,9 @@ En esta sexta parte comenzaremos a construir nuestros primeros proyectos de gran
   - [Chatflow Tool](#chatflow-tool)
   - [Custom Tool](#custom-tool)
 - [Replicando Perplexity](#replicando-perplexity)
+  -[Código para la Réplica](#código-para-la-réplica)
+    -[Código para usar BraveSearch](#código-para-llamar-a-bravesearch)
+    -[Código para hacer Scraping](#código-para-scrapear-las-webs-obtenidas)
 
 ## Flujo de la Información
 
@@ -172,3 +175,153 @@ Y lo vamos a hacer siguiendo muchos de los principios que hemos aprendido en est
 Dejo a continuación un esquema con el funcionamiento del proyecto que construiremos.
 
 ![Esquema de la réplica de Perplexity](../../.gitbook/assets/partes/parte6/perplexity.jpg)
+
+### Código para la Réplica
+
+A continuación, el código necesario para realizar esta réplica.
+
+#### Código para llamar a BraveSearch
+
+```javascript
+async function searchBrave(query) {
+    try {
+        // Verificación de que $tools existe
+        if (!$tools) {
+            throw new Error("No se han proporcionado herramientas ($tools es undefined). Verifica que el nodo Brave Search esté conectado correctamente.");
+        }
+
+        const braveTool = $tools['brave-search'];
+        if (!braveTool || typeof braveTool.invoke !== 'function') {
+            throw new Error("Herramienta Brave Search no disponible o no conectada correctamente en el flujo");
+        }
+
+        if (!query || typeof query !== 'string') {
+            throw new Error("Query inválido o vacío");
+        }
+
+        console.log("Búsqueda realizada:", query);
+
+        const searchConfig = {
+            input: query
+        };
+
+        const result = await braveTool.invoke(searchConfig);
+        
+        // Si el resultado es un string, lo devolvemos directamente
+        if (typeof result === 'string') {
+            console.log("Resultado obtenido:", result);
+            return result;
+        }
+        
+        // Si no, intentamos obtener el toolOutput o convertimos el resultado a string
+        const finalResult = result.toolOutput || JSON.stringify(result, null, 2);
+        console.log("Resultado obtenido:", finalResult);
+        return finalResult;
+
+    } catch (error) {
+        console.error("Error detallado:", error.message);
+        return `Error en la búsqueda: ${error.message}`;
+    }
+}
+
+// Verificación inicial de que tenemos acceso a $tools
+if (typeof $tools === 'undefined') {
+    console.error("Error: $tools no está definido");
+    return "Error: Herramientas no disponibles. Verifica la conexión con el nodo Brave Search.";
+}
+
+const query = $flow.input;
+if (!query) {
+    return "Error: No se proporcionó un término de búsqueda";
+}
+
+return await searchBrave(query);
+```
+
+
+
+#### Código para scrapear las webs obtenidas:
+
+```javascript
+const fetch = require('node-fetch');
+const cheerio = require('cheerio');
+
+async function getCleanedText(url) {
+    try {
+        console.log(`Procesando URL: ${url}`);
+        const response = await fetch(url);
+        if (!response.ok) { 
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const html = await response.text();
+        const $ = cheerio.load(html);
+        $('script, style, noscript, svg, img, iframe, link').remove();
+        const textContent = $('body')
+            .find('h1, h2, h3, h4, h5, h6, p, li, td, th, article, section')
+            .map((i, el) => $(el).text().trim().replace(/\s+/g, ' '))
+            .get()
+            .join('\n\n')
+            .replace(/(\n\s*){3,}/g, '\n\n') 
+            .trim();
+        return textContent;
+    } catch (error) {
+        console.error(`Error procesando ${url}:`, error.message);  
+        return `Error: ${error.message}`; 
+    }
+}
+
+async function processFirstFiveLinks(jsonString) {
+    try {
+        // Limpiamos el string de los marcadores de código JSON
+        const cleanJsonString = jsonString
+            .replace(/^```json\n/, '')  // Elimina ```json del inicio
+            .replace(/\n```$/, '')      // Elimina ``` del final
+            .trim();                    // Elimina espacios extra
+
+        // Parseamos el JSON limpio
+        const links = JSON.parse(cleanJsonString);
+        
+        const firstFiveEntries = Object.entries(links)
+            .filter(([key]) => key.startsWith('link'))
+            .slice(0, 5);
+
+        console.log("Procesando los primeros 5 enlaces...");
+      
+        const results = await Promise.all(
+            firstFiveEntries.map(async ([linkId, url]) => {
+                const text = await getCleanedText(url);
+                return {
+                    linkId,
+                    url,
+                    text
+                };
+            })
+        );
+
+        const formattedResults = results
+            .map(result =>
+                `${result.linkId}:\n` +
+                `URL: ${result.url}\n` +
+                `CONTENIDO:\n${result.text}\n` +
+                `----------------------------------------\n`
+            )
+            .join('\n');
+
+        return formattedResults;
+    } catch (error) {
+        console.error("Error procesando los enlaces:", error);
+        return `Error procesando los enlaces: ${error.message}`;
+    }
+}
+
+// Usando $links como variable de entrada en Flowise
+const links = $link;
+
+if (!links) {
+    return "Error: No se proporcionaron enlaces. La variable $links está vacía.";
+}
+
+// Procesar y retornar el resultado
+return await processFirstFiveLinks(links);
+
+```
