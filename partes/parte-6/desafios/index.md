@@ -17,7 +17,7 @@ Se proporcionarán múltiples prompts y casos para evaluar el funcionamiento del
 - Sistema de evaluación de criterios
 - Gestión de datos de contacto
 
-![Esquema](../../../gitbook/assets/partes/parte6/desafio6.png)
+![Esquema](../../../.gitbook/assets/partes/parte6/desafio6.png)
 
 ## Requisitos Específicos del Puesto (Electricista)
 
