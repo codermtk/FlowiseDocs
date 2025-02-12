@@ -16,7 +16,7 @@
 * [Parte 5: Agentes y Herramientas](partes/parte-5/README.md)
   * [Desafío 3: Verificador de Información](partes/parte-5/desafios/index.md)
 
-* [Parte 6: Agentes Avanzados](partes/parte-6/README.md)
+* [Parte 6: Agentes Avanzados y Utilities](partes/parte-6/README.md)
   * [Desafío 4: Evaluador de Candidatos](partes/parte-6/desafios/index.md)
 
 * [Parte 7: Integraciones y Plataformas](partes/parte-7/README.md)
