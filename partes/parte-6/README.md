@@ -91,8 +91,6 @@ AutoGPT es un agente autónomo que utiliza un proceso de pensamiento en cadena p
 - Evalúa los resultados
 - Ajusta su estrategia según sea necesario
 
-![AutoGPT](../../.gitbook/assets/partes/parte6/autogpt.png)
-
 
 ## Herramientas Avanzadas
 
