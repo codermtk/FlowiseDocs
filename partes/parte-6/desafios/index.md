@@ -1,45 +1,75 @@
-# Desafío 4: Gerente de Reclutamiento
+# Desafío 4: Agente de Compra/Venta de Coches
 
 ## Objetivo
-Crear un agente capaz de evaluar candidatos según requisitos específicos y gestionar su información en Google Sheets.
+Crear un agente que automatice el proceso de compra y venta de coches en un concesionario para los clientes. El agente debe ser capaz de:
+- Valorar un coche a partir de una imagen o una descripción en texto proporcionada por el cliente, determinando su precio de mercado.
+- Consultar una base de datos en Airtable para obtener el precio de un modelo específico en caso de que el cliente esté interesado en comprar un coche.
+- Recopilar datos de contacto y detalles de la operación, tales como nombre, apellido, teléfono, correo electrónico, tipo de operación (compra o venta) y el nombre del modelo del coche.
+- Enviar toda la información recopilada a un Google Sheets mediante una Custom Tool.
 
 ## Funcionalidades
-- Evaluación de requisitos
-- Recopilación de información de contacto **(solo si se cumplen los requisitos)**
-- Integración con Google Sheets **(para almacenar la información de los candidatos que cumplen los requisitos)**
 
-## Casos de Prueba
-Se proporcionarán múltiples prompts y casos para evaluar el funcionamiento del agente.
+### Evaluación del Valor del Coche
+
+El agente deberá analizar el input del cliente, que puede ser una imagen o una descripción en texto, para estimar el valor del coche según el mercado. Esto puede lograrse mediante:
+- Una Chain Tool que procese el input y devuelva una estimación del precio del coche.
+- Otro Chatflow que pueda conectarse mediante una Chatflow Tool que tenga la capacidad de valorar coches.
+- Herramientas de búsqueda o personalizadas.
+
+### Consulta a Base de Datos en Airtable
+
+Si el cliente está interesado en comprar un coche del concesionario, el agente deberá tener la capacidad de consultar en una base de datos en Airtable los modelos de coches disponibles, sus precios y sus usos principales.
+
+Base de datos con los coches: [https://airtable.com/appr8aU4iQfB8lobf/shrBCl5n7htiRCIDy]
+
+### Recopilación de Datos del Cliente
+Independientemente de si se realiza una operación de compra o de venta, el agente deberá solicitar y recopilar la siguiente información:
+- Nombre
+- Apellido
+- Teléfono
+- Correo electrónico
+- Tipo de operación (Compra o Venta)
+- Modelo del coche (a comprar o vender)
+
+### Envío de Datos a Google Sheets
+Una vez recopilada y validada la información de compra/venta, se utilizará una Custom Tool para enviar los datos a un Google Sheets a través de un webhook. Esta herramienta se programará en JavaScript y utilizará variables para transmitir correctamente la información.
 
 ## Requisitos Técnicos
-- Integración con Google Sheets
-- Capacidad de procesamiento de lenguaje natural
-- Sistema de evaluación de criterios
-- Gestión de datos de contacto
+- **Integración con Airtable:** El agente debe ser capaz de usar los datos contenidos dentro del Airtable y extraer el precio de los coches que tenemos a la venta en caso de intención de compra.
+- **Valoración de Mercado:** Implementar herramientas que permitan valorar el coche del cliente, ya sea si sube una foto de se coche o la información por escrito.
+- **Uso de Herramientas Avanzadas:** Emplear una Custom Tool para la integración con Google Sheets, y utilizar una Chain Tool u otras herramientas según se requiera para la evaluación y consulta de datos.
 
-![Esquema](../../../.gitbook/assets/partes/parte6/desafio6.png)
+## Ejemplo de Código para la Custom Tool (Envío a Google Sheets)
 
-## Requisitos Específicos del Puesto (Electricista)
+```javascript
+const fetch = require('node-fetch');
+const url = 'https://tu-webhook-url.com'; // Reemplazar con la URL del webhook
 
-Estos son los requisitos específicos que el agente debe poder evaluar para el puesto de **Electricista**:
+const body = {
+  "nombre": $vars.nombre,
+  "apellidos": $vars.apellidos,
+  "correo": $vars.correo,
+  "telefono": $vars.telefono,
+  "tipoOperacion": $vars.tipoOperacion,
+  "modeloCoche": $vars.modeloCoche,
+  "valorCoche": $vars.valorCoche
+};
 
-- **Formación y Certificaciones (Excluyente):**
-    - **Formación Profesional (FP) en Electricidad o equivalente:** Necesario. Se valorará formación específica en instalaciones de baja tensión, automatismos, etc.
+const options = {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(body)
+};
 
-- **Experiencia Laboral (Excluyente):**
-    - **Mínimo de 3 años de experiencia demostrable como electricista en instalaciones residenciales y/o comerciales:** Se debe poder verificar la experiencia a través de referencias o certificados de trabajo.
+try {
+  const response = await fetch(url, options);
+  const text = await response.text();
+  return text;
+} catch (error) {
+  console.error(error);
+  return 'Error al enviar datos';
+}
 
-- **Otros (Deseable):**
-    - Disponibilidad para trabajar en horarios flexibles, incluyendo fines de semana y festivos si fuese necesario.
-    - Carnet de conducir.
-
-## Datos a Recopilar y Enviar a Google Sheets (Solo si se cumplen los requisitos)
-
-**El agente solo debe recopilar y almacenar en Google Sheets los siguientes datos de los candidatos que cumplan con todos los requisitos excluyentes:**
-
--   **Nombre:** Nombre del candidato.
--   **Apellido:** Apellido del candidato.
--   **Correo Electrónico:** Dirección de correo electrónico del candidato.
--   **Teléfono:** Número de teléfono del candidato.
-
-**Nota:** Si un candidato no cumple con los requisitos excluyentes, no se debe recopilar ni almacenar su información de contacto en Google Sheets.
+```
