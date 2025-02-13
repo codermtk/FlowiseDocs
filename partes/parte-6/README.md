@@ -248,48 +248,96 @@ const cheerio = require('cheerio');
 
 async function getCleanedText(url) {
     try {
-        console.log(`Procesando URL: ${url}`);
-        const response = await fetch(url);
+        console.log(`Iniciando proceso para URL: ${url}`);
+        
+        const controller = new AbortController();
+        const timeout = setTimeout(() => {
+            controller.abort();
+        }, 10000); 
+
+        console.log('Intentando fetch...');
+        const response = await fetch(url, {
+            signal: controller.signal,
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                'Accept-Language': 'en-US,en;q=0.5'
+            }
+        });
+        
+        clearTimeout(timeout);
+
         if (!response.ok) { 
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
+
+        console.log('Fetch exitoso, obteniendo texto...');
         const html = await response.text();
+        
+        console.log('Cargando contenido en cheerio...');
         const $ = cheerio.load(html);
+        
+        console.log('Limpiando elementos no deseados...');
         $('script, style, noscript, svg, img, iframe, link').remove();
+        
+        console.log('Extrayendo texto...');
         const textContent = $('body')
             .find('h1, h2, h3, h4, h5, h6, p, li, td, th, article, section')
-            .map((i, el) => $(el).text().trim().replace(/\s+/g, ' '))
+            .map((i, el) => {
+                const text = $(el).text().trim().replace(/\s+/g, ' ');
+                // Log del texto encontrado (primeros 100 caracteres)
+                if (text.length > 0) {
+                    console.log(`Encontrado texto: ${text.substring(0, 100)}...`);
+                }
+                return text;
+            })
             .get()
             .join('\n\n')
             .replace(/(\n\s*){3,}/g, '\n\n') 
             .trim();
+
+        if (!textContent) {
+            console.log('No se encontró texto en la página');
+            return 'No se encontró contenido legible en la página';
+        }
+
+        console.log(`Procesamiento exitoso para ${url}`);
         return textContent;
+
     } catch (error) {
-        console.error(`Error procesando ${url}:`, error.message);  
-        return `Error: ${error.message}`; 
+        if (error.name === 'AbortError') {
+            console.error(`Timeout alcanzado para ${url}`);
+            return `Error: La página tardó demasiado en responder`;
+        }
+        console.error(`Error detallado procesando ${url}:`, error);
+        return `Error: ${error.message}`;
     }
 }
 
 async function processFirstFiveLinks(jsonString) {
     try {
-        // Limpiamos el string de los marcadores de código JSON
+        console.log('Iniciando procesamiento de links...');
+        
         const cleanJsonString = jsonString
-            .replace(/^```json\n/, '')  // Elimina ```json del inicio
-            .replace(/\n```$/, '')      // Elimina ``` del final
-            .trim();                    // Elimina espacios extra
+            .replace(/^```json\n/, '')
+            .replace(/\n```$/, '')
+            .trim();
 
-        // Parseamos el JSON limpio
+        console.log('JSON limpio:', cleanJsonString.substring(0, 100) + '...');
+        
         const links = JSON.parse(cleanJsonString);
         
         const firstFiveEntries = Object.entries(links)
             .filter(([key]) => key.startsWith('link'))
             .slice(0, 5);
 
-        console.log("Procesando los primeros 5 enlaces...");
+        console.log(`Procesando ${firstFiveEntries.length} enlaces...`);
       
         const results = await Promise.all(
             firstFiveEntries.map(async ([linkId, url]) => {
+                console.log(`Iniciando procesamiento de ${linkId}...`);
                 const text = await getCleanedText(url);
+                console.log(`Finalizado procesamiento de ${linkId}`);
                 return {
                     linkId,
                     url,
@@ -298,6 +346,7 @@ async function processFirstFiveLinks(jsonString) {
             })
         );
 
+        console.log('Formateando resultados...');
         const formattedResults = results
             .map(result =>
                 `${result.linkId}:\n` +
@@ -309,19 +358,18 @@ async function processFirstFiveLinks(jsonString) {
 
         return formattedResults;
     } catch (error) {
-        console.error("Error procesando los enlaces:", error);
+        console.error("Error detallado procesando los enlaces:", error);
         return `Error procesando los enlaces: ${error.message}`;
     }
 }
 
-// Usando $links como variable de entrada en Flowise
 const links = $link;
-
 if (!links) {
-    return "Error: No se proporcionaron enlaces. La variable $links está vacía.";
+    console.error("Variable $link está vacía");
+    return "Error: No se proporcionaron enlaces. La variable $link está vacía.";
 }
 
-// Procesar y retornar el resultado
+console.log('Iniciando proceso completo...');
 return await processFirstFiveLinks(links);
 
 ```
