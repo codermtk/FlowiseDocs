@@ -176,6 +176,9 @@ Dejo a continuación un esquema con el funcionamiento del proyecto que construir
 
 ![Esquema de la réplica de Perplexity](../../.gitbook/assets/partes/parte6/perplexity.jpg)
 
+Aquí está el archivo del proyecto en caso de que prefiráis importarlo directamente, aunque recomiendo seguir los pasos del vídeo y montarlo desde 0.
+[https://github.com/codermtk/ProyectosCurso.git]
+
 ### Código para la Réplica
 
 A continuación, el código necesario para realizar esta réplica.
