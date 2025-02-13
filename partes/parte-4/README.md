@@ -57,13 +57,13 @@ Las proveedores modernos priorizan la amutomatización y se enfocan en developer
 Esto reduce la dificultad para el uso, pero puede limitar el nivel de personalización que tienes sobre la infrastructura.
 
 * [Elestio](https://elest.io/open-source/flowiseai)
-* [Hugging Face](hugging-face.md)
-* [Railway](railway.md)
-* [Render](render.md)
-* [Replit](replit.md)
-* [RepoCloud](https://repocloud.io/details/?app_id=29)
-* [Sealos](sealos.md)
-* [Zeabur](zeabur.md)
+* Hugging Face
+* Railway
+* Render
+* Replit
+* RepoCloud
+* Sealos
+* Zeabur
 
 #### Proveedores establecidos
 
@@ -104,7 +104,7 @@ AWS nos permite tener una escalabilidad elástica, es decir,  ajustar los recurs
 ### Cómo Empezar a Usar Railway
 
 Para desplegar un proyecto en Railway haz click en el siguiente link:
-https://railway.app/template/nEGbjR
+*[https://railway.app/template/nEGbjR]
 
 Pasos:
 1. Haz click en Deploy Now
