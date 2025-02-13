@@ -13,9 +13,9 @@ En esta sexta parte comenzaremos a construir nuestros primeros proyectos de gran
   - [Chatflow Tool](#chatflow-tool)
   - [Custom Tool](#custom-tool)
 - [Replicando Perplexity](#replicando-perplexity)
-  -[Código para la Réplica](#código-para-la-réplica)
-    -[Código para usar BraveSearch](#código-para-llamar-a-bravesearch)
-    -[Código para hacer Scraping](#código-para-scrapear-las-webs-obtenidas)
+  - [Código para la Réplica](#código-para-la-réplica)
+    - [Código para usar BraveSearch](#código-para-llamar-a-bravesearch)
+    - [Código para hacer Scraping](#código-para-scrapear-las-webs-obtenidas)
 
 ## Flujo de la Información
 
