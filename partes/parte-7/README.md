@@ -4,27 +4,32 @@ En esta séptima parte del curso, exploraremos cómo integrar Flowise con alguna
 
 ## Contenidos
 
-- [Integraciones con Redes Sociales](#integraciones-con-redes-sociales)
-- [Integración con Make (Integromat)](#integración-con-make)
+- [Integraciones con Plataformas de Mensajería](#integraciones-con-plataformas-de-mensajería)
+- [Análisis de Chatflows]
 
-## Integraciones con Redes Sociales
-
-### Facebook Messenger
-- Configuración del webhook
-- Manejo de mensajes
-- Respuestas automáticas
-- Gestión de conversaciones
+## Integraciones con Plataformas de Mensajería
 
 ### WhatsApp
+
+- Configuración de la Meta Business Suite
+[https://business.facebook.com/](https://business.facebook.com/)
 - Configuración de WhatsApp Business API
-- Manejo de mensajes y multimedia
-- Respuestas automatizadas
+[https://developers.facebook.com/](https://developers.facebook.com/)
+- Integración con Make
+[https://make.com/](https://make.com/)
 
-## Integración con Make
+### Telegram
 
-### Configuración Básica
-- Creación de escenarios
-- Configuración de webhooks
-- Manejo de datos
-- Transformaciones
+- Creación de bots en BotFather
+[https://telegram.me/BotFather](https://telegram.me/BotFather)
+- Integración con Make
+[https://make.com/](https://make.com/)
+
+
+## Anlálisis de Chatflows
+
+![Sección de análisis](../../.gitbook/assets/partes/parte7/chatflowanalisis.png)
+
+- LangSmith: [https://smith.langchain.com](https://smith.langchain.com)
+- LangFuse: [https://langfuse.com/](https://langfuse.com/)
 
