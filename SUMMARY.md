@@ -19,14 +19,14 @@
 * [Parte 6: Agentes Avanzados y Utilities](partes/parte-6/README.md)
   * [Desafío 4: Agente de Compra/Venta](partes/parte-6/desafios/index.md)
 
-* [Parte 7: Integraciones y Plataformas](partes/parte-7/README.md)
-  * [Desafío 5](partes/parte-7/desafios/index.md)
+* [Parte 7: Integraciones y Análisis](partes/parte-7/README.md)
+  * [Desafío 5: Despliegue de un proyecto entero](partes/parte-7/desafios/index.md)
 
 * [Parte 8: Multi-Agents](partes/parte-8/README.md)
-  * [Desafíos](partes/parte-8/desafios/index.md)
+  * [Desafío 6: Viaje a Marte](partes/parte-8/desafios/index.md)
 
 * [Parte 9: Agentes Secuenciales](partes/parte-9/README.md)
-  * [Desafíos](partes/parte-9/desafios/index.md)
+  * [Desafío 7: Restaurante Gourmet](partes/parte-9/desafios/index.md)
 
 * [Parte 10: Sequential Agents Avanzados](partes/parte-10/README.md)
 
