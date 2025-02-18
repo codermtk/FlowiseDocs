@@ -19,7 +19,7 @@ Historiales Médicos:
 - Encargado de Comunicaciones (Liam O'Connell): Gestiona las comunicaciones con la Tierra y mantiene un registro de eventos. Debe usar una custom tool para anotar en Google Sheets los eventos que ocurran.
 - Científico de Superficie (Dr. Anya Sharma): Investiga fenómenos en Marte. Puede usar Serp API u otras herramientas de obtención de información para investigar descubrimientos.
 
-## Escenario
+## Escenarios para la tripulación
 
 La nave se encuentra a mitad de camino hacia Marte cuando se presentan las siguientes emergencias:
 
