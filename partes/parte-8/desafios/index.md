@@ -14,8 +14,10 @@ La tripulación está compuesta por:
 - Capitán (Alex Ramsey) (Supervisor): Coordina al equipo y toma las decisiones finales.
 - Ingeniero (Zoe Tanaka): Responsable del mantenimiento y reparación de la nave. Puede usar la Calculadora para cálculos complejos.
 - Médico (Dr. Ben Carter): Se encarga de la salud de la tripulación. Puede usar una retriever tool para acceder a historiales médicos.
+Historiales Médicos:
+[https://github.com/codermtk/ProyectosCurso/blob/e821a1e17b8b40640203a9b3ea738f6913ea5392/Material/historial.medico.pdf](https://github.com/codermtk/ProyectosCurso/blob/e821a1e17b8b40640203a9b3ea738f6913ea5392/Material/historial.medico.pdf)
 - Encargado de Comunicaciones (Liam O'Connell): Gestiona las comunicaciones con la Tierra y mantiene un registro de eventos. Debe usar una custom tool para anotar en Google Sheets los eventos que ocurran.
-- Científico de Superficie (Dr. Anya Sharma): Investiga fenómenos en Marte. Puede usar Serp API para investigar descubrimientos.
+- Científico de Superficie (Dr. Anya Sharma): Investiga fenómenos en Marte. Puede usar Serp API u otras herramientas de obtención de información para investigar descubrimientos.
 
 ## Escenario
 
